@@ -3,9 +3,13 @@ import CoreConcept from './components/CoreConcept.jsx';
 import Header from './components/Header/Header.jsx';
 import TabButton from './components/TabButton.jsx';
 
-
-
 function App() {
+
+  function handleSelect() {
+    console.log(`Hello World - selected`);
+  }
+
+
   return (
     <div>
       <Header/>
@@ -39,10 +43,20 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton>
+            <TabButton onClick={handleSelect}>
               Components 
             </TabButton>
+            <TabButton onClick={handleSelect}>
+              JSX 
+            </TabButton>
+            <TabButton onClick={handleSelect}>
+              Props 
+            </TabButton>
+            <TabButton onClick={handleSelect}>
+              State 
+            </TabButton>
           </menu>
+              Dynamic Content
         </section>
       </main>
     </div>
