@@ -1,13 +1,16 @@
+import { useState } from 'react';
 import { CORE_CONCEPTS } from './data.js';
 import CoreConcept from './components/CoreConcept.jsx';
 import Header from './components/Header/Header.jsx';
 import TabButton from './components/TabButton.jsx';
 
 function App() {
-  let tabContent = 'Please click a button';
+  const [selectedTopic,setSelectedTopic] = useState('Please click a button');
 
   function handleSelect(selectedButton) {
-    tabContent = selectedButton;
+    setSelectedTopic(selectedButton);
+
+    console.log(selectedTopic);
   }
 
   console.log(`APP COMPONENT EXECUTING`);
@@ -60,7 +63,7 @@ function App() {
               State 
             </TabButton>
           </menu>
-          {tabContent}
+          {selectedTopic}
         </section>
       </main>
     </div>
