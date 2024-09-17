@@ -1,6 +1,7 @@
 //you can not do it in vanilla javascript.
 import reactImg from './assets/react-core-concepts.png';
 import componentsImg from './assets/components.png';
+import { CORE_CONCEPTS } from './data.js';
 
 const reactDescription = ['Fundamental', 'Crucial', 'Core'];
 
@@ -26,12 +27,12 @@ function Header() {
 
 // Header(); we don't call Component like this in React, ReactJS under the hood calls the 'Header' component for us.
 
-function CoreConcept(props) {
+function CoreConcept({image,title,description}) {
   return (
     <li>
-      <img src={props.image} alt={props.title} />
-      <h3>{props.title}</h3>
-      <p>{props.description}</p>
+      <img src={image} alt={title} />
+      <h3>{title}</h3>
+      <p>{description}</p>
     </li>
   )
 }
@@ -45,16 +46,25 @@ function App() {
           <h2>Core Concepts</h2>
           <ul>
             <CoreConcept
-              title="Components"
-              description="The Core UI building block."
-              image={componentsImg}
+              title={CORE_CONCEPTS[0].title}
+              description={CORE_CONCEPTS[0].description}
+              image={CORE_CONCEPTS[0].image}
             />
             <CoreConcept
-              title="Props"
-              description="The Core UI building block."
-              image={componentsImg}
+              {
+               ...CORE_CONCEPTS[1] 
+              }
             />
-           
+            <CoreConcept
+              {
+                ...CORE_CONCEPTS[2]
+              }
+            />
+            <CoreConcept
+              {
+                ...CORE_CONCEPTS[3]
+              }
+            />
           </ul>
         </section>
       </main>
