@@ -4,10 +4,13 @@ import Header from './components/Header/Header.jsx';
 import TabButton from './components/TabButton.jsx';
 
 function App() {
+  let tabContent = 'Please click a button';
 
   function handleSelect(selectedButton) {
-    console.log(selectedButton);
+    tabContent = selectedButton;
   }
+
+  console.log(`APP COMPONENT EXECUTING`);
 
 
   return (
@@ -57,7 +60,7 @@ function App() {
               State 
             </TabButton>
           </menu>
-              Dynamic Content
+          {tabContent}
         </section>
       </main>
     </div>
