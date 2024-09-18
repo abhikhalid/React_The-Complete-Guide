@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { CORE_CONCEPTS } from './data.js';
+import { EXAMPLES, CORE_CONCEPTS } from './data.js';
 import CoreConcept from './components/CoreConcept.jsx';
 import Header from './components/Header/Header.jsx';
 import TabButton from './components/TabButton.jsx';
 
 function App() {
-  const [selectedTopic,setSelectedTopic] = useState('Please click a button');
+  const [selectedTopic, setSelectedTopic] = useState('components');
 
   function handleSelect(selectedButton) {
     setSelectedTopic(selectedButton);
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div>
-      <Header/>
+      <Header />
       <main>
         <section id="core-concepts">
           <h2>Core Concepts</h2>
@@ -30,17 +30,17 @@ function App() {
             />
             <CoreConcept
               {
-               ...CORE_CONCEPTS[1] 
+              ...CORE_CONCEPTS[1]
               }
             />
             <CoreConcept
               {
-                ...CORE_CONCEPTS[2]
+              ...CORE_CONCEPTS[2]
               }
             />
             <CoreConcept
               {
-                ...CORE_CONCEPTS[3]
+              ...CORE_CONCEPTS[3]
               }
             />
           </ul>
@@ -51,19 +51,28 @@ function App() {
           <menu>
             <TabButton
               onClick={() => handleSelect('components')}>
-              Components 
+              Components
             </TabButton>
             <TabButton onClick={() => handleSelect('jsx')}>
-              JSX 
+              JSX
             </TabButton>
             <TabButton onClick={() => handleSelect('props')}>
-              Props 
+              Props
             </TabButton>
             <TabButton onClick={() => handleSelect('state')}>
-              State 
+              State
             </TabButton>
           </menu>
-          {selectedTopic}
+
+          <div id="tab-content">
+            <h3>{EXAMPLES[selectedTopic].title}</h3>
+            <p>{EXAMPLES[selectedTopic].description}</p>
+            <pre>
+              <code>
+                {EXAMPLES[selectedTopic].code}
+              </code>
+            </pre>
+          </div>
         </section>
       </main>
     </div>
