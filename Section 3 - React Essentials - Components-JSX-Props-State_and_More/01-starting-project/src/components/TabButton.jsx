@@ -1,10 +1,10 @@
 import React from 'react';
 
-const TabButton = ({ children, onClick }) => {
+const TabButton = ({ children, onClick, isSelected }) => {
     console.log(`TABBUTTON COMPONENT EXECUTING`);
     return (
         <li>
-            <button onClick={onClick}>
+            <button className={isSelected ? 'active' : ''} onClick={onClick}>
                 {children}
             </button>
         </li>

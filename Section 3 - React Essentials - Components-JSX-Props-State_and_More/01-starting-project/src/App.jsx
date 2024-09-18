@@ -37,26 +37,14 @@ function App() {
         <section id="core-concepts">
           <h2>Core Concepts</h2>
           <ul>
-            <CoreConcept
-              title={CORE_CONCEPTS[0].title}
-              description={CORE_CONCEPTS[0].description}
-              image={CORE_CONCEPTS[0].image}
-            />
-            <CoreConcept
-              {
-              ...CORE_CONCEPTS[1]
-              }
-            />
-            <CoreConcept
-              {
-              ...CORE_CONCEPTS[2]
-              }
-            />
-            <CoreConcept
-              {
-              ...CORE_CONCEPTS[3]
-              }
-            />
+            {
+              CORE_CONCEPTS.map(conceptItem => (
+                <CoreConcept
+                  key={conceptItem.title}
+                  {...conceptItem}
+                />
+              ))
+            }
           </ul>
         </section>
 
@@ -64,20 +52,27 @@ function App() {
           <h2>Examples</h2>
           <menu>
             <TabButton
+              isSelected={selectedTopic === 'components'}
               onClick={() => handleSelect('components')}>
               Components
             </TabButton>
-            <TabButton onClick={() => handleSelect('jsx')}>
+            <TabButton
+              isSelected={selectedTopic === 'jsx'}
+              onClick={() => handleSelect('jsx')}>
               JSX
             </TabButton>
-            <TabButton onClick={() => handleSelect('props')}>
+            <TabButton
+              isSelected={selectedTopic === 'props'}
+              onClick={() => handleSelect('props')}>
               Props
             </TabButton>
-            <TabButton onClick={() => handleSelect('state')}>
+            <TabButton
+              isSelected={selectedTopic === 'state'}
+              onClick={() => handleSelect('state')}>
               State
             </TabButton>
           </menu>
-          
+
           {tabContent}
 
         </section>
