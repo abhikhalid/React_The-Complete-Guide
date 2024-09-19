@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import TabButton from './TabButton';
 import { EXAMPLES } from '../data';
+import Section from './Section';
 
 const Examples = () => {
     const [selectedTopic, setSelectedTopic] = useState();
@@ -26,8 +27,8 @@ const Examples = () => {
     }
     
     return (
-        <section id="examples">
-            <h2>Examples</h2>
+        //Problem: Props Are Not Forwarded To Inner Elements ( we have to receive id prop) 
+        <Section title="Examples" id="examples">
             <menu>
                 <TabButton
                     isSelected={selectedTopic === 'components'}
@@ -53,7 +54,7 @@ const Examples = () => {
 
             {tabContent}
 
-        </section>
+        </Section>
     );
 };
 
