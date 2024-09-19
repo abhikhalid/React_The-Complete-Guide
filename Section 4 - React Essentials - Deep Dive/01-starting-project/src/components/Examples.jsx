@@ -27,7 +27,6 @@ const Examples = () => {
     }
     
     return (
-        //Problem: Props Are Not Forwarded To Inner Elements ( we have to receive id prop) 
         <Section title="Examples" id="examples">
             <menu>
                 <TabButton
