@@ -4,10 +4,36 @@ import Player from "./components/Player"
 import Log from "./components/Log";
 
 function App() {
+  const [gameTurns, setGameTurns] = useState([]);
   const [activePlayer, setActivePlayer] = useState('X');
 
-  function handleSelectSquare() {
+  function handleSelectSquare(rowIndex,colIndex) {
     setActivePlayer((curActivePlayer) => curActivePlayer === 'X' ? 'O' : 'X');
+
+    setGameTurns((prevTurns) => {
+      let currentPlayer = 'X';
+
+      if (prevTurns.length > 0 && prevTurns[0].player === 'X') {
+        currentPlayer =  'O';
+      }
+
+
+      const updatedTurns = [
+        {
+          square:
+          {
+            row: rowIndex,
+            col: colIndex
+          },
+          // player: activePlayer // but this is not optimal way of doing it. we are basically merging 2 state into 1 state. we can not be sure whether we would get the latest activePlayer due to react state scheduling. 
+          player: currentPlayer
+        },
+        ...prevTurns
+      ];
+
+      return updatedTurns;
+    });
+
   }
 
   return (
@@ -29,10 +55,10 @@ function App() {
         </ol>
         <GameBoard
           onSelectSquare={handleSelectSquare}
-          activePlayerSymbol={activePlayer}
+          turns={gameTurns}
         />
       </div>
-       <Log/>
+      <Log turns={gameTurns}/>
     </main>
   )
 }
