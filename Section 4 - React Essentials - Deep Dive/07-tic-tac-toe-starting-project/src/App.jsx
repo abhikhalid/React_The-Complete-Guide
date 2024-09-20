@@ -99,7 +99,7 @@ function App() {
           />
 
         </ol>
-        {(winner || hasDraw) && <GameOver/>}
+        {(winner || hasDraw) && <GameOver winner={winner} />}
 
         <GameBoard
           onSelectSquare={handleSelectSquare}
