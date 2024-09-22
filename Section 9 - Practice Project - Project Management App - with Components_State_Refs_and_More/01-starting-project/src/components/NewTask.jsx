@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 const NewTask = ({onAdd}) => {
-    const [enteredTask, setEnteredTask] = useState();
+    // const [enteredTask, setEnteredTask] = useState();
+    const [enteredTask, setEnteredTask] = useState('');
 
 
     function handleChange(event) {
@@ -9,6 +10,10 @@ const NewTask = ({onAdd}) => {
     }
 
     function handleClick() {
+        if (enteredTask.trim() === '') {
+            return;
+        }
+        
         onAdd(enteredTask); // forward the value to the App Component in the end.
         setEnteredTask('');
     }

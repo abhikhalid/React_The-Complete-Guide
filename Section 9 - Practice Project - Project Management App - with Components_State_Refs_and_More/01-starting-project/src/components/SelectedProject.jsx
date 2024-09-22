@@ -1,7 +1,7 @@
 import React from 'react';
 import Tasks from './Tasks';
 
-const SelectedProject = ({ project, onDelete, onAddTask, onDeleteTask, tasks }) => {
+const SelectedProject = ({ project, onDelete, onAddTask, onDeleteTask, tasks, selectedProjectId }) => {
     const formattedDate = new Date(project.dueDate).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',

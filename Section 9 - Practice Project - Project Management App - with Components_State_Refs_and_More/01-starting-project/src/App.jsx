@@ -27,8 +27,13 @@ function App() {
     });
   }
 
-  function handleDeleteTask() {
-
+  function handleDeleteTask(id) {
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        tasks: prevState.tasks.filter((task) => task.id !== id)
+      }
+    })
   }
 
   function handleSelectProject(id) {
@@ -86,11 +91,12 @@ function App() {
   const selectedProject = projectsState.projects.find(project => project.id === projectsState.selectedProjectId);
 
   let content = <SelectedProject
-                project={selectedProject}
-                onDelete={handleDeleteProject}
-                onAddTask={handleAddTask}
-                onDeleteTask={handleDeleteTask}
-                tasks={projectsState.tasks}
+    project={selectedProject}
+    onDelete={handleDeleteProject}
+    onAddTask={handleAddTask}
+    onDeleteTask={handleDeleteTask}
+    tasks={projectsState.tasks}
+    selectedProjectId={projectsState.selectedProjectId}
   />;
 
   if (projectsState.selectedProjectId === null) {
