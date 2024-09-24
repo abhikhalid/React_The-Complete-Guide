@@ -66,17 +66,16 @@ function App() {
       };
     });
   }
-  
+
   const ctxValue = {
     items: shoppingCart.items,
-    addItemToCart: handleAddItemToCart
+    addItemToCart: handleAddItemToCart,
+    updateItemQuantity: handleUpdateCartItemQuantity
   }
 
   return (
     <CartContext.Provider value={ctxValue}>
       <Header
-        cart={shoppingCart}
-        onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
       />
       <Shop>
         {DUMMY_PRODUCTS.map((product) => (
