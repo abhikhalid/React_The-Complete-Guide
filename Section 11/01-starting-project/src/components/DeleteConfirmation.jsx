@@ -1,5 +1,5 @@
 export default function DeleteConfirmation({ onConfirm, onCancel }) {
-
+//If you are using prop or state values in your effect function, you shoudl include them in the dependencies array.
   useEffect(() => {
     console.log(`TIMER SET`);
 
@@ -17,7 +17,7 @@ export default function DeleteConfirmation({ onConfirm, onCancel }) {
       console.log(`Clening up timer`);
       clearTimeout(timer);
     }
-  }, [])
+  }, [onConfirm]) //when adding function as dependencies, there is a danger of creating infinite loop.
   
   
   return (
