@@ -14,13 +14,9 @@ function App() {
   const [availabePlaces, setAvailablePlaces] = useState([]);
   const [pickedPlaces, setPickedPlaces] = useState([]);
 
-  //useEffect is a hook that allows you to perform side effects in function components
-  //it is called after the first render. First JSX executed then lastly useEffect executes.
-  //the second argument is an array of dependencies
-  //if the array is empty, the effect will only run after the first render
-  //if the array is not provided, the effect will run after every render
-  //if the array contains values, the effect will only run if one of the values changes
-  //the return value of the effect can be a function that cleans up the effect
+  //not all side effects require the usage of useEffect. because overusing useEffect and using it 
+  // unnecessarily is considered a bad practice. because you must not forget this is an extra execution cycle.
+  //avoid using useEffect if you don't need it.
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position)=>{
       const sortedPlaces = sortPlacesByDistance(
@@ -51,6 +47,13 @@ function App() {
       const place = AVAILABLE_PLACES.find((place) => place.id === id);
       return [place, ...prevPickedPlaces];
     });
+     
+    // another side effec, because this code is not directly releated to rendering the JSX Code.
+    const storedIds = JSON.parse(localStorage.getItem('selectedPlaces')) || [];
+    if (storedIds.indexOf(id) === -1) {
+      localStorage.setItem('selectedPlaces', JSON.stringify([id, ...storedIds]));
+    }
+    
   }
 
   function handleRemovePlace() {
