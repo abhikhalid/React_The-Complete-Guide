@@ -1,9 +1,25 @@
 export default function DeleteConfirmation({ onConfirm, onCancel }) {
 
-  setTimeout(()=>{
-     onConfirm();
-  },3000);
+  useEffect(() => {
+    console.log(`TIMER SET`);
 
+   const timer = setTimeout(()=>{
+      onConfirm();
+   },3000);
+
+    //this functon will be called when the component is unmounted.
+    //this is useful for cleaning up any side effects that the component may have created.
+    //this is useful for unsubscribing from events, clearing timers, or cancelling any network requests.
+    //this is useful for cleaning up any resources that the component may have created.
+    
+    //calls automaticallhy when this effect function runs again or right before this component is removed from the DOM.
+    return () => {
+      console.log(`Clening up timer`);
+      clearTimeout(timer);
+    }
+  }, [])
+  
+  
   return (
     <div id="delete-confirmation">
       <h2>Are you sure?</h2>
