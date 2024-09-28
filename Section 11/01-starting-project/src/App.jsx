@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import Places from './components/Places.jsx';
 import { AVAILABLE_PLACES } from './data.js';
@@ -71,7 +71,10 @@ function App() {
     }
   }
 
-  function handleRemovePlace() {
+  //with useCallback, we can make sure that this function is not recreated with every render cycle.
+  // Instead it stores it internally in memory and reuses it for every render cycle.
+  // that's why you should use useCallback when passing functions as dependencies to useEffect.
+  const handleRemovePlace = useCallback(function handleRemovePlace() {
     setPickedPlaces((prevPickedPlaces) =>
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
     );
@@ -84,7 +87,7 @@ function App() {
       JSON.stringify(storedIds.filter((id) => id !== selectedPlace.current))
     )
 
-  }
+  },[]); //this depenedencies works exactly same as useEffect. React will only recreate this function if the dependencies change.
 
   return (
     <>
