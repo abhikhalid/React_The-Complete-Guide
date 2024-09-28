@@ -1,11 +1,30 @@
+import { useEffect, useState } from "react";
+
+const TIMER = 3000;
+
 export default function DeleteConfirmation({ onConfirm, onCancel }) {
-//If you are using prop or state values in your effect function, you shoudl include them in the dependencies array.
+  const [remainingTime, setRemainingTime] = useState(TIMER);
+
+  useEffect(() => {
+   const interval =  setInterval(() => {
+      console.log(`INTERVAL`);
+      setRemainingTime(prevTime => prevTime - 10);
+    },10);
+
+    return () => {
+      console.log(`CLEANING UP INTERVAL`);
+      clearInterval(interval);
+    }
+  }, [])
+  
+
+  //If you are using prop or state values in your effect function, you shoudl include them in the dependencies array.
   useEffect(() => {
     console.log(`TIMER SET`);
 
    const timer = setTimeout(()=>{
       onConfirm();
-   },3000);
+   },TIMER);
 
     //this functon will be called when the component is unmounted.
     //this is useful for cleaning up any side effects that the component may have created.
@@ -32,6 +51,7 @@ export default function DeleteConfirmation({ onConfirm, onCancel }) {
           Yes
         </button>
       </div>
+      <process value={remainingTime} max={TIMER}/>
     </div>
   );
 }
