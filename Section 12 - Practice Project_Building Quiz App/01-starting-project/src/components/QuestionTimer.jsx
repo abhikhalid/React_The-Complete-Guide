@@ -4,15 +4,15 @@ export default function QuestionTimer({timeout, onTimeout}) {
   const [remainingTime, setRemainingTime] = useState(timeout);
 
   useEffect(() => {
-    console.log('I am from first use effect')
+    console.log('SETTING TIMEOUT')
     setTimeout(onTimeout,timeout);
   }, [timeout, onTimeout]); //add depenedencies if you use in effect function.
   
   useEffect(() => {
-    console.log(`I am from second use effect`);
+    console.log(`SETTING INTERVAL`);
     setInterval(()=>{
         setRemainingTime((prevRemainingTime) => prevRemainingTime -100);
-   });
+   },100);
  }, []);
   
   return (
