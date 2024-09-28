@@ -5,20 +5,27 @@ import { AVAILABLE_PLACES } from './data.js';
 import Modal from './components/Modal.jsx';
 import DeleteConfirmation from './components/DeleteConfirmation.jsx';
 import logoImg from './assets/logo.png';
+import {sortPlacesByDistance} from './loc.js';
 
 function App() {
   const modal = useRef();
   const selectedPlace = useRef();
+
+  const [availabePlaces, setAvailablePlaces] = useState([]);
   const [pickedPlaces, setPickedPlaces] = useState([]);
 
  //that;s now where things get tricky. Because this entire code is actually a side effect.
  // This code is ofcourse needed by this application. But it's not directly realted to the rendering of the application.
+ // It's a side effect that should be executed when the component is mounted.
  // Because the main goal of every component function is to return a renderable JSX code. 
  navigator.geolocation.getCurrentPosition((position)=>{
-    const sortedPlaces = setPlacesByDistance(
+    const sortedPlaces = sortPlacesByDistance(
       AVAILABLE_PLACES,
       position.coords.latitude,
       position.coords.longitude);
+
+      setAvailablePlaces(sortedPlaces); //tells react to re-render the component
+      console.log(sortedPlaces);
   });
 
   function handleStartRemovePlace(id) {
@@ -73,7 +80,7 @@ function App() {
         />
         <Places
           title="Available Places"
-          places={AVAILABLE_PLACES}
+          places={availabePlaces}
           onSelectPlace={handleSelectPlace}
         />
       </main>
