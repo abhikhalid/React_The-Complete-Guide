@@ -4,6 +4,10 @@ import { createPortal } from 'react-dom';
 function Modal({open,children }) {
   const dialog = useRef();
 
+  //Effect dependecies are simply prop or state values that are used inside of the effect function.
+  //In addition, other effect dependencies would be functions or context values that depened on or use state or props.
+  //any other values are not considered as dependencies. because useEffect only cares about dependencies that would cause the component function to execute again. 
+
   useEffect(() => {
     if(open)
     {
@@ -11,11 +15,11 @@ function Modal({open,children }) {
     }else{
       dialog.current.close();
     }
-  }, []);
+  }, [open]);
   
 
   return createPortal(
-    <dialog className="modal" ref={dialog} open={open}>
+    <dialog className="modal" ref={dialog}>
       {children}
     </dialog>,
     document.getElementById('modal')
