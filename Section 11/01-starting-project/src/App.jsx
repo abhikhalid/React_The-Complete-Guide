@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Places from './components/Places.jsx';
 import { AVAILABLE_PLACES } from './data.js';
@@ -14,19 +14,25 @@ function App() {
   const [availabePlaces, setAvailablePlaces] = useState([]);
   const [pickedPlaces, setPickedPlaces] = useState([]);
 
- //that;s now where things get tricky. Because this entire code is actually a side effect.
- // This code is ofcourse needed by this application. But it's not directly realted to the rendering of the application.
- // It's a side effect that should be executed when the component is mounted.
- // Because the main goal of every component function is to return a renderable JSX code. 
- navigator.geolocation.getCurrentPosition((position)=>{
-    const sortedPlaces = sortPlacesByDistance(
-      AVAILABLE_PLACES,
-      position.coords.latitude,
-      position.coords.longitude);
+  //useEffect is a hook that allows you to perform side effects in function components
+  //it is called after the first render. First JSX executed then lastly useEffect executes.
+  //the second argument is an array of dependencies
+  //if the array is empty, the effect will only run after the first render
+  //if the array is not provided, the effect will run after every render
+  //if the array contains values, the effect will only run if one of the values changes
+  //the return value of the effect can be a function that cleans up the effect
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position)=>{
+      const sortedPlaces = sortPlacesByDistance(
+        AVAILABLE_PLACES,
+        position.coords.latitude,
+        position.coords.longitude);
+  
+        setAvailablePlaces(sortedPlaces); //tells react to re-render the component
+        console.log(sortedPlaces);
+    });
+  }, []);
 
-      setAvailablePlaces(sortedPlaces); //tells react to re-render the component
-      console.log(sortedPlaces);
-  });
 
   function handleStartRemovePlace(id) {
     modal.current.open();
@@ -81,6 +87,7 @@ function App() {
         <Places
           title="Available Places"
           places={availabePlaces}
+          fallbackText="Sorting places by distance..."
           onSelectPlace={handleSelectPlace}
         />
       </main>
