@@ -1,0 +1,10 @@
+FOR FRONT-END
+
+npm i 
+npm run dev
+
+FOR BACKEND
+
+cd backend 
+npm i
+node app.js
