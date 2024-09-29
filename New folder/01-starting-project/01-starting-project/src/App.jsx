@@ -5,6 +5,7 @@ import Modal from './components/Modal.jsx';
 import DeleteConfirmation from './components/DeleteConfirmation.jsx';
 import logoImg from './assets/logo.png';
 import AvailablePlaces from './components/AvailablePlaces.jsx';
+import { updateUserPlaces } from './https.js';
 
 function App() {
   const selectedPlace = useRef();
@@ -22,7 +23,7 @@ function App() {
     setModalIsOpen(false);
   }
 
-  function handleSelectPlace(selectedPlace) {
+  async function handleSelectPlace(selectedPlace) {
     setUserPlaces((prevPickedPlaces) => {
       if (!prevPickedPlaces) {
         prevPickedPlaces = [];
@@ -32,6 +33,14 @@ function App() {
       }
       return [selectedPlace, ...prevPickedPlaces];
     });
+
+    // updateUserPlaces(userPlaces); this won't work because the state is not updated immediately and this line is part of old component function.
+    try{
+      await updateUserPlaces([selectedPlace, ...userPlaces]);
+    }catch(error){
+      console.error(error);
+    }
+
   }
 
   const handleRemovePlace = useCallback(async function handleRemovePlace() {
