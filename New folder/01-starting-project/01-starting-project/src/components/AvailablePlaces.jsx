@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import Places from './Places.jsx';
+import { useEffect } from 'react';
 
 export default function AvailablePlaces({ onSelectPlace }) {
   const [AvailablePlaces, setAvailablePlaces] = useState([]);
 
-  //this code will create infininte loop
-  fetch('http://localhost:3000/places')
-  .then(response => {
-    return response.json()
-  })
-  .then(resData => {
-    setAvailablePlaces(resData.places);
-  })
-
+  useEffect(() => {
+    fetch('http://localhost:3000/places')
+    .then(response => {
+      return response.json()
+    })
+    .then(resData => {
+      setAvailablePlaces(resData.places);
+    })
+  }, []);
+  
   
   return (
     <Places
