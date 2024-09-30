@@ -7,33 +7,28 @@ import logoImg from './assets/logo.png';
 import AvailablePlaces from './components/AvailablePlaces.jsx';
 import { fetchUserPlaces, updateUserPlaces } from './http.js';
 import Error from './components/Error.jsx';
+import { useFetch } from './hooks/useFetch.js';
 
 function App() {
   const selectedPlace = useRef();
 
-  const [userPlaces, setUserPlaces] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
-  const [error, setError] = useState();
+  // const [userPlaces, setUserPlaces] = useState([]);
+  // const [isFetching, setIsFetching] = useState(false);
+  // const [error, setError] = useState();
 
   const [errorUpdatingPlaces, setErrorUpdatingPlaces] = useState();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  useEffect(() => {
-    async function fetchPlaces() {
-      setIsFetching(true);
-      try {
-        const places = await fetchUserPlaces();
-        setUserPlaces(places);
-      } catch (error) {
-        setError({ message: error.message || 'Failed to fetch user places.' });
-      }
-
-      setIsFetching(false);
-    }
-
-    fetchPlaces();
-  }, []);
+  //Any state that is managed by that custom hook will also belong to the component in which you are using your custom hook.
+  //If the state gets updated in the custom hook, it will also trigger a re-render of the component in which you are using the custom hook.
+  const {
+    isFetching, 
+    error, 
+    fetchedData : userPlaces,
+    setFetchedData: setUserPlaces
+  } 
+    = useFetch(fetchUserPlaces, []); //it will perform all the work internally
 
   function handleStartRemovePlace(place) {
     setModalIsOpen(true);
@@ -88,7 +83,8 @@ function App() {
 
       setModalIsOpen(false);
     },
-    [userPlaces]
+    [userPlaces,setUserPlaces] //before using custom hook, we didn't have to add state updating function as dependency in useCallback or useEffect function. Because React guarantees that, they
+    //will always be the same function instance. But now, we have to add them as dependency because they are coming from custom hook and React don't guarantee that they will be the same function instance.
   );
 
   function handleError() {
@@ -135,7 +131,8 @@ function App() {
           />
         )}
 
-        <AvailablePlaces onSelectPlace={handleSelectPlace} />
+        <AvailablePlaces 
+          onSelectPlace={handleSelectPlace} /> 
       </main>
     </>
   );
