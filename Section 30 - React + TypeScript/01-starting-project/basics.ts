@@ -47,3 +47,11 @@ let people: {
     name: string;
     age: number;
 }[];
+
+
+// Type inference
+
+let course = 'React - The complete guide';
+// let course: string = 'React - The complete guide'; // this is reduntant, typescript can infer the type of course as string
+
+// course = 1234; //error, why? because course is string type. Typescript infer the type of course as string
