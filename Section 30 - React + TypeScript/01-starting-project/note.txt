@@ -1,0 +1,7 @@
+install typescript
+
+npm install typescript --save-dev
+
+
+
+npx tsc with-typescript.ts  (it will create a js file without the types and change const to var. to support older browsers)
