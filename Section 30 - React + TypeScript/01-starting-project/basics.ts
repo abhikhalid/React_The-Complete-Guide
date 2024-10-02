@@ -72,7 +72,7 @@ function print(value: any) : void {
 
 //Generics
 
-function insertAtBeginnig(array: any[], value: any) {
+function insertAtBeginnig(array: T[], value: T) {
     const newArray = [value, ...array];
     return newArray;
 }
@@ -80,5 +80,5 @@ function insertAtBeginnig(array: any[], value: any) {
 const demoArray = [1,2,3];
 
 const updatedArray = insertAtBeginnig(demoArray, -1); // [-1, 1, 2, 3]
+const stringArray = insertAtBeginnig(['a', 'b', 'c'], 'd'); // ['d', 'a', 'b', 'c']
 
-updatedArray[0].split(''); //I would get run time error instead. We can use generics to avoid this.
