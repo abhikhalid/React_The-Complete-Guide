@@ -11,7 +11,7 @@ let age : number;
 
 age = 12;
 
-let userName : string;
+let userName : string | string[]; // union types
 
 userName = 'khalid';
 
@@ -51,7 +51,10 @@ let people: {
 
 // Type inference
 
-let course = 'React - The complete guide';
-// let course: string = 'React - The complete guide'; // this is reduntant, typescript can infer the type of course as string
+// let course = 'React - The complete guide';
 
-// course = 1234; //error, why? because course is string type. Typescript infer the type of course as string
+// course = 1234; // we could have a variable which can store both string and number. In that case we can use union types. iT can be string or number
+
+let course: string | number = 'React - The complete guide';
+
+course = 12341; //now allowed
