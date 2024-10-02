@@ -57,3 +57,14 @@ let people: Person[];
 let course: string | number = 'React - The complete guide';
 
 course = 12341; //now allowed
+
+
+// Functions and types
+
+function add(a: number, b: number) {
+    return a + b;
+}
+
+function print(value: any) : void {
+    console.log(value);
+}
