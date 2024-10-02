@@ -6,8 +6,7 @@ function App() {
     new Todo('Learn React'),
     new Todo('Learn TypeScript')
   ];
-
-
+  
   return (
     <div>
       <Todos items={todos}/>
