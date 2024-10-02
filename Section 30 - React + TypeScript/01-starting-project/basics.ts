@@ -26,21 +26,24 @@ isInstructor = true;
 
 // More Complex types
 
-let hobbies: string[];
+let hobbies: string[]; //array types
 
 hobbies = ['Sports', 'Cooking'];
 
-let person; // by default it has any type so we can add any value to it.
-//any is a fallback type which you typically should not use.
 
+//object type
+let person: {
+    name: string;
+    age: number;
+}
 
 person = {
-    name: 'khalid',
+    name: 'Khalid',
     age: 30
 }
 
 
-//I don;t want to allow any other properties other than name and age, so we have to define the type of person object.
-person = {
-    isEmployee: true
-}
+let people: {
+    name: string;
+    age: number;
+}[];
