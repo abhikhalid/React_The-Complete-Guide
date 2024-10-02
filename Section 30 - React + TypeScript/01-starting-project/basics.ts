@@ -30,12 +30,14 @@ let hobbies: string[]; //array types
 
 hobbies = ['Sports', 'Cooking'];
 
-
-//object type
-let person: {
+//we can define a type and reuse it.
+type Person = {
     name: string;
     age: number;
-}
+};
+
+//object type
+let person: Person
 
 person = {
     name: 'Khalid',
@@ -43,10 +45,7 @@ person = {
 }
 
 
-let people: {
-    name: string;
-    age: number;
-}[];
+let people: Person[];
 
 
 // Type inference
