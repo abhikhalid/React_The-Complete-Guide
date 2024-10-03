@@ -1,6 +1,7 @@
 import React from 'react'
 import Todo from '../models/todo';
 import { TodoItem } from './TodoItem';
+import classes from './Todos.module.css';
 
 //There is also a special prop, the children prop; and we don't even to know the type of it.
 // Which we could find out which type that should be abd addded like this but it will quickly become cumbersome
@@ -12,7 +13,7 @@ import { TodoItem } from './TodoItem';
 
 const Todos: React.FC<{items: Todo[]}> =(props) => {
   return (
-    <ul>
+    <ul className={classes.todos}>
         {
            props.items.map((item) => (
             // <li key={item.id}>{item.text}</li>
