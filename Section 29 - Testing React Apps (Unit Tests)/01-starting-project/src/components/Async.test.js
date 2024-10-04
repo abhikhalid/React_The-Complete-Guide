@@ -4,6 +4,14 @@ import Async from "./Async";
 describe('Async component', () => {
    test('renders posts if request succeeds', async () => {
         // Arrange
+
+        window.fetch = jest.fn();
+        //mockResolvedValueOnce() it allows us to set a value this fetch function should resolve
+        window.fetch.mockResolvedValueOnce({
+            json: async () => [{id: 'p1', title: 'First post'}]
+        });
+
+
         render(<Async />);
         // Act
 
