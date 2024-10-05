@@ -1,4 +1,4 @@
-// This file is the reference of Old Login.jsx file. (not using anymore!)
+// This file is the reference of Old Login.jsx file. 
 
 import { useState } from "react";
 
@@ -12,6 +12,9 @@ export default function Login() {
     password:''
   });
 
+  const emailIsValid =
+    enteredValues.email.trim() !== '' &&
+   !enteredValues.email.includes('@');
 
 
   const handleSubmit = (event) => {
@@ -53,6 +56,11 @@ export default function Login() {
            onChange={(event) => handleInputChange('email',event.target.value)}
            value={enteredValues.email}
           />
+
+          <div className="control-error">
+            {emailIsValid && <p>Please enter a valid email address.</p>}
+          </div>
+
         </div>
 
         <div className="control no-margin">
