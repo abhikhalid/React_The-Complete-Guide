@@ -12,8 +12,15 @@ export default function Login() {
     password:''
   });
 
+
+  //user interact with them but they did lost focus 
+  const [didEdit, setDidEdit] = useState({
+    email:false,
+    password:false
+  });
+
   const emailIsValid =
-    enteredValues.email.trim() !== '' &&
+    didEdit.email &&
    !enteredValues.email.includes('@');
 
 
@@ -32,6 +39,20 @@ export default function Login() {
         [identifier]: value
       }
     });
+
+    setDidEdit(prevEdit => {
+      return {
+        ...prevEdit,
+        [identifier]: false
+      }
+    })
+  }
+
+  function handleInputBlur(identifier){
+    setDidEdit(prevEdit => ({
+      ...prevEdit,
+      [identifier]: true
+    }))
   }
 
   // function handleEmailChange(event) {
@@ -53,6 +74,7 @@ export default function Login() {
            id="email" 
            type="email"
            name="email"
+           onBlur={() =>handleInputBlur('email')}
            onChange={(event) => handleInputChange('email',event.target.value)}
            value={enteredValues.email}
           />
