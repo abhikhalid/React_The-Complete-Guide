@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import { log } from '../../log';
 
 function ConfigureCounter({onSet}) {
@@ -7,7 +7,7 @@ function ConfigureCounter({onSet}) {
     
    const [enteredNumber, setEnteredNumber] = useState(0);
 
-    function handleChange(event) {
+   function handleChange(event) {
       setEnteredNumber(+event.target.value);
     }
   
