@@ -16,10 +16,23 @@ export default function Checkout() {
     userProgressCtx.hideCheckout();
  }
 
+ function handleSubmit(event)
+ {
+    event.preventDefault();
+    //we could use state for getting the value
+    // we could also use ref for getting the value
+
+    //third state: use built-in FormData object
+
+    const fd =  new FormData(event.target);
+    const customerData = Object.fromEntries(fd.entries()); // {email: test@example.com}
+    
+
+ }
 
   return (
     <Modal open={userProgressCtx.progress === 'checkout'} onClose={handleClose}>
-        <form>
+        <form onSubmit={handleSubmit}>
             <h2>Checkout</h2>
             <p>Total Amount: ${currencyFormatter.format(cartTotal)}</p>
 
