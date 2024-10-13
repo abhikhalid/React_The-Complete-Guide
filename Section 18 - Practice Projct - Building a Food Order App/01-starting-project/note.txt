@@ -1,0 +1,13 @@
+for front-end
+
+npm i
+npm run dev
+
+for backend project
+
+cd backend
+
+npm i
+
+npm start
+
