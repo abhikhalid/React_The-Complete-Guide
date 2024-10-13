@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import MealItem from './MealItem';
 
 //React Component can not be a async function
 export default function Meals() {
@@ -16,18 +17,15 @@ export default function Meals() {
       const meals = await response.json();
       setLoadedMeals(meals);
     }
-    
+
     fetchMeals();
-    
   }, []);
   
   
   return (
     <ul id="meals">
       {loadedMeals.map(meal => (
-        <li key={meal.id}>
-            {meal.name}
-        </li>
+          <MealItem key={meal.id} meal={meal}/>
       ))}
     </ul>
   )
