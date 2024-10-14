@@ -11,6 +11,12 @@ export default function NewEventsSection() {
   const {data, isPending, isError, error} = useQuery({
     queryKey: ['events'], //key name is totally up to you. you could have object or anything else
     queryFn: fetchEvents, // the fetch events will be executed by Tanstack Query to fetch my data.
+    // staleTime: 0, // default vlaue is 0. if you want to cache the data for a certain amount of time, you can set it to a different value
+    staleTime: 5000, 
+    //Garbage Collection Time : this controls how long the data and the cache will be kept around.
+    // the default value is 5 minutes. if you want to change that, you can set it to a different value
+    //gcTime: 30000, // 30 seconds (The cahced data would only be kept around for half a minute and thereafter, it would be discarded). So thereafter, this component needs to render again. It would fetch the data again.
+    
   });
   
   let content;
