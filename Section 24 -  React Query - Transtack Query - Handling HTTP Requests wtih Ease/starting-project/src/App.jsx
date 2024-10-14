@@ -8,6 +8,7 @@ import Events from './components/Events/Events.jsx';
 import EventDetails from './components/Events/EventDetails.jsx';
 import NewEvent from './components/Events/NewEvent.jsx';
 import EditEvent from './components/Events/EditEvent.jsx';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 const router = createBrowserRouter([
   {
@@ -37,8 +38,17 @@ const router = createBrowserRouter([
   },
 ]);
 
+
+// This is a general configuration object, that will be required by Tanstack Query. 
+const queryClient = new QueryClient();
+
+
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+       <RouterProvider router={router} />
+    </QueryClientProvider>
+);
 }
 
 export default App;
