@@ -9,8 +9,8 @@ import { fetchEvents } from '../../util/http.js';
 export default function NewEventsSection() {
   // this hook now behind the scenes send an HTTP Request. get us the event data that we need in this section and also give us loading state and potential error state
   const {data, isPending, isError, error} = useQuery({
-    queryKey: ['events'], //key name is totally up to you. you could have object or anything else
-    queryFn: fetchEvents, // the fetch events will be executed by Tanstack Query to fetch my data.
+    queryKey: ['events', {max:3}], //key name is totally up to you. you could have object or anything else
+    queryFn:  ({signal, queryKey}) => fetchEvents({signal, ...queryKey[1]}), // the fetch events will be executed by Tanstack Query to fetch my data.
     // staleTime: 0, // default vlaue is 0. if you want to cache the data for a certain amount of time, you can set it to a different value
     staleTime: 5000, //It will wait 5000 milliseconds before sending another request.
     //Garbage Collection Time : this controls how long the data and the cache will be kept around.
