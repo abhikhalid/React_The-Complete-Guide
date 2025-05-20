@@ -1,0 +1,7 @@
+1. (useEffect(), memo(), useMemo(), useCallback(), contextAPI hook
+
+https://chatgpt.com/share/682c0c72-e510-800c-8367-303c676c8eb9
+
+2. JS+TS MCQ Question + 1 problem solving regarding a project
+
+https://chatgpt.com/share/682c0cbe-e4f0-800c-b781-ab88e17911eb
